@@ -43,4 +43,21 @@ defmodule Feedback do
     }
   end
 
+  def comentario(equipo_id, autor_id, titulo, detalle, opts \\ []),
+    do: crear(equipo_id, autor_id, Keyword.merge([tipo: :comentario, titulo: titulo, detalle: detalle], opts))
+
+  def revision(equipo_id, autor_id, titulo, detalle, acciones \\ [], opts \\ []),
+    do: crear(equipo_id, autor_id, Keyword.merge([tipo: :revision, titulo: titulo, detalle: detalle, acciones: acciones], opts))
+
+  def puntaje(equipo_id, autor_id, titulo, detalle, puntaje, opts \\ []),
+    do: crear(equipo_id, autor_id, Keyword.merge([tipo: :puntaje, titulo: titulo, detalle: detalle, puntaje: puntaje], opts))
+
+
+  def set_estado_accion(%__MODULE__{} = f, nuevo) when nuevo in @estados_accion, do: %{f | estado_accion: nuevo}
+  def agregar_accion(%__MODULE__{} = f, accion) when is_binary(accion), do: %{f | acciones: f.acciones ++ [accion]}
+
+  defp validar_tipo!(t) when t in @tipos, do: :ok
+  defp validar_tipo!(t), do: raise(ArgumentError, "Tipo inválido #{inspect(t)}. Usa: #{@tipos |> Enum.join(", ")}")
+
+
 end

@@ -19,7 +19,6 @@ defmodule Equipo do
       participantes: [],
       mentores: []
     }
-
   end
 
   def crear_desde_consola() do
@@ -27,5 +26,4 @@ defmodule Equipo do
     tema   = IO.gets("Tema/Afinidad del equipo: ") |> String.trim()
     crear(nombre, tema)
   end
-
 end
