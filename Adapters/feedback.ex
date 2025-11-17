@@ -7,7 +7,7 @@ defmodule FeedbackCSV do
   alias CsvUtil
   alias Feedback
 
-  # ---------- API ----------
+  # API
   def all(), do: read_all()
 
   def get(id) when is_integer(id),
@@ -56,7 +56,7 @@ end
     end
   end
 
-  # --- Limpieza de valores antes de escribir ---
+  #Limpieza de valores antes de escribi
   defp sanitize_value(nil), do: ""
   defp sanitize_value("nil"), do: ""
   defp sanitize_value(value) when is_integer(value), do: Integer.to_string(value)
